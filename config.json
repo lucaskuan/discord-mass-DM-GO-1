@@ -3,6 +3,6 @@
     "rate_limit_delay": 650,
     "offset": 30000,
     "skip_completed": true,
-    "proxy": "",
+    "proxy": "gate.proxiware.com:2000",
     "remove_dead_tokens": true
 }

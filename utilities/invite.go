@@ -46,7 +46,7 @@ func GetFingerprint() string {
 	}
 	var fingerprinty Fingerprintx
 	json.Unmarshal(body, &fingerprinty)
-	color.Yellow("Obtained Fingerprint: " + fingerprinty.Fingerprint + "\n")
+	// color.Yellow("Obtained Fingerprint: " + fingerprinty.Fingerprint + "\n")
 	return fingerprinty.Fingerprint
 
 }
@@ -69,7 +69,7 @@ func Bypass(serverid string, token string) {
 		color.Red("Error while sending HTTP request bypass %v \n", err)
 	}
 	if resp.StatusCode == 201 || resp.StatusCode == 204 {
-		color.Green("Successfully bypassed token")
+		color.Green("Successfully bypassed token %v", token)
 	} else {
 		color.Red("Failed to bypass Token %v", resp.StatusCode)
 	}
@@ -141,32 +141,31 @@ func JoinGuild(inviteCode string, token string) {
 	}
 	p, m := DecodeBr(body)
 	if m != nil {
-		color.Red("%v",m)
+		color.Red("%v", m)
 	}
-	
+
 	type guild struct {
-		ID string `json:"id"`
+		ID   string `json:"id"`
 		Name string `json:"name"`
 	}
 	type joinresponse struct {
-		VerificationForm bool `json:"show_verification_form"`
-		GuildObj guild `json:"guild"`
+		VerificationForm bool  `json:"show_verification_form"`
+		GuildObj         guild `json:"guild"`
 	}
-
 
 	var ResponseBody joinresponse
 	json.Unmarshal(p, &ResponseBody)
-
 
 	if resp.StatusCode == 200 {
 		color.Green("Succesfully joined guild")
 		if ResponseBody.VerificationForm {
 			if len(ResponseBody.GuildObj.ID) != 0 {
 				Bypass(ResponseBody.GuildObj.ID, token)
-			}	
+			}
 		}
 	}
 	if resp.StatusCode != 200 {
+		fmt.Printf(string(p))
 		fmt.Printf("ERR: Unexpected Status code %v while joining token %v \n", resp.StatusCode, token)
 	}
 
@@ -231,7 +230,8 @@ func LaunchInviteJoiner() {
 	var wg sync.WaitGroup
 	wg.Add(len(lines))
 	for i := 0; i < len(lines); i++ {
-		time.Sleep(5 * time.Millisecond)
+		time.Sleep(5000 * time.Millisecond)
+		// time.Sleep(time.Duration(rand.Intn(60000)) * time.Millisecond)
 		go func(i int) {
 			defer wg.Done()
 			JoinGuild(code, lines[i])

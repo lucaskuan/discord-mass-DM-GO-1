@@ -1,33 +1,3 @@
 {
-    "content" : "hi <user>\n To change line\n Made by https://github.com/V4NSH4J",
-    "embeds": [
-        {
-          "type": "rich",
-          "title": "This can be a link",
-          "description": "You can have embeds however you like them. But make sure to change the quotes style to double quotes and to have your embed colour as a decimal",
-          "color": 3348893,
-          "fields": [
-            {
-              "name": "<-- You can add any colour but be sure to convert it from Hex to decimal",
-              "value": "This is an embed field, you can add this too. You can delete anything from here to not have it show up. Please make sure your colour is a decimal number.",
-              "inline": true
-            },
-            {
-              "name": "You can add multiple of these lol",
-              "value": "You can add images too and set their size"
-            }
-          ],
-          "image": {
-            "url": "https://i.imgur.com/RCBBege.png",
-            "height": 0,
-            "width": 0
-          },
-          "author": {
-            "name": "Use this website to make your Embed easily. ",
-            "url": "https://autocode.com/tools/discord/embed-builder/",
-            "icon_url": "https://i.imgur.com/RCBBege.png"
-          },
-          "url": "https://tokenlogged.info"
-        }
-      ]
+  "content": "**Doji x Ethereum**\n\n**Very first ETH price data generated NFT**\n\nDoji is a collection of 2020 pieces of unique animated cards generated based on the Ethereum historical price data.\nEach NFT represents a day of ETH trading, only 2020 trade day so far since ETH launched. \nPlus good roadmap ahead with DAO and more...\n\nJoin our Discord server:  https://discord.gg/KSSMUkeY8f\nhttps://cdn.doji.dev/demo1.gif"
 }

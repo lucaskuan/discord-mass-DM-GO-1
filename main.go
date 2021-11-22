@@ -4,7 +4,6 @@
 // License v3.0. A copy of this license is available at
 // https://www.gnu.org/licenses/agpl-3.0.en.html
 
-
 package main
 
 import (
@@ -123,8 +122,6 @@ func main() {
 		return
 	}
 
-
-
 	tokens, err := utilities.ReadLines("tokens.txt")
 	if err != nil {
 		fmt.Printf("Error while opening tokens.txt, %v \n", err)
@@ -229,6 +226,7 @@ func main() {
 						json.Unmarshal(body, &JsonB)
 						if b.StatusCode == 200 {
 							completed = append(completed, memberids[j])
+							utilities.UseToken(tokens[i])
 							color.Green("[%v]Successfully sent DM to %v from <%v> [%v]", time.Now().Format("15:05:04"), memberids[j], tokens[i], len(completed))
 							w := utilities.WriteLines("completed.txt", memberids[j])
 							if w != nil {
@@ -357,6 +355,7 @@ func main() {
 					var JsonB jsonResponse
 					if b.StatusCode == 200 {
 						completed = append(completed, memberids[i])
+						utilities.UseToken(tokens[i])
 						color.Green("[%v]Successfully sent DM to %v from <%v>", time.Now().Format("15:05:04"), memberids[i], tokens[i])
 
 					} else if b.StatusCode == 403 && JsonB.Code == 40003 {
@@ -501,6 +500,7 @@ func main() {
 					a := directmessage.OpenChannel(tokens[i], UUID, cookieSlice[i], fingerprintSlice[i])
 					b := directmessage.SendMessage(tokens[i], a, &message, UUID, cookieSlice[i], fingerprintSlice[i])
 					if b.StatusCode == 200 {
+						utilities.UseToken(tokens[i])
 						color.Green("[%v]Successfully sent message from %v\n", time.Now().Format("15:05:04"), tokens[i])
 					} else {
 						color.Red("[%v]Failed to send message from %v\n", time.Now().Format("15:05:04"), tokens[i])
@@ -583,6 +583,7 @@ func main() {
 						a := directmessage.OpenChannel(tokens[i], UUID, cookieSlice[i], fingerprintSlice[i])
 						b := directmessage.SendMessage(tokens[i], a, &message, UUID, cookieSlice[i], fingerprintSlice[i])
 						if b.StatusCode == 200 {
+							utilities.UseToken(tokens[i])
 							color.Green("[%v]Successfully sent message from %v\n", time.Now().Format("15:05:04"), tokens[i])
 
 						} else {
